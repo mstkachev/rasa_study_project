@@ -20,11 +20,7 @@ logger = logging.getLogger(__name__)
 
 
 class RestInput(InputChannel):
-    """A custom http input channel.
-
-    This implementation is the basis for a custom implementation of a chat
-    frontend. You can customize this to send messages to Rasa and
-    retrieve responses from the assistant."""
+    """A custom http input channel."""
 
     @classmethod
     def name(cls) -> Text:
