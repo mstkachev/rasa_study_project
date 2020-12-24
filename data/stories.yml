@@ -9,8 +9,8 @@ stories:
 
 - story: sad path 1
   steps:
-  - intent: greet
-  - action: utter_greet
+  - intent: goodbye
+  - action: utter_goodbye
 
 - story: sad path 2
   steps:
