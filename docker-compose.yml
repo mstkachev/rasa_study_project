@@ -2,7 +2,7 @@ version: '3.0'
 
 services:
   rasa:
-    image: rasa/rasa:latest-full
+    image: rasa/rasa:1.10.16
     networks: ['rasa-network']
     ports:
     - "5005:5005"
@@ -12,17 +12,13 @@ services:
     - run
 
   action_server:
-    image: rasa/rasa-sdk:latest
+    image: rasa/rasa-sdk:1.10.3
     networks: ['rasa-network']
     ports:
     - "5055:5055"
     volumes:
     - "./rasa-app-data/actions:/app/actions"
-
-  duckling:
-    image: rasa/duckling:latest
-    networks: ['rasa-network']
-    ports:
-    - "8000:8000"
+    command:
+    - run actions
 
 networks: {rasa-network: {}}
