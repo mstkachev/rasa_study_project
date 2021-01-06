@@ -126,13 +126,15 @@ class CheckForm1(FormAction):
                     obj = tracker.get_slot("slot_intent_action")
                     if obj == "Записаться":
                         text = f"{tracker.get_slot('slot_name')}, давайте сначала все проверим.\n" \
-                               f"Записываем {tracker.get_slot('slot_name')} на сдачу " \
-                               f"по {tracker.get_slot('slot_subject')}.\n" \
+                               f"Запись на сдачу:\n" \
+                               f"Студент: {tracker.get_slot('slot_name')}\n" \
+                               f"Предмет: {tracker.get_slot('slot_subject')}\n" \
                                f"Подтверждаете?"
                     else:
                         text = f"{tracker.get_slot('slot_name')}, давайте сначала все проверим.\n" \
-                               f"Вычеркиваем {tracker.get_slot('slot_name')} из очереди на сдачу " \
-                               f"по {tracker.get_slot('slot_subject')}.\n" \
+                               f"Отмена записи на сдачу:\n" \
+                               f"Студент: {tracker.get_slot('slot_name')}\n" \
+                               f"Предмет: {tracker.get_slot('slot_subject')}\n" \
                                f"Подтверждаете?"
                     buttons = [{"title": "Да", "payload": 'Да'},
                                {"title": "Нет", "payload": 'Нет'}]
@@ -148,8 +150,8 @@ class CheckForm1(FormAction):
             return {"slot_submit": value}
         else:
             text_init = "Выберите значение с помощью кнопок!"
-            buttons = [{"title": "Записаться", "payload": 'Записаться'},
-                       {"title": "Отменить запись", "payload": 'Отменить запись'}]
+            buttons = [{"title": "Да", "payload": 'Да'},
+                       {"title": "Нет", "payload": 'Нет'}]
             dispatcher.utter_message(text=text_init, buttons=buttons)
             return {"slot_submit": None}
 
