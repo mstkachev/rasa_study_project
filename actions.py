@@ -72,7 +72,7 @@ class CheckForm(FormAction):
                     dispatcher.utter_message(text=text, buttons=buttons)
                     return [SlotSet(REQUESTED_SLOT, slot)]
                 if slot == "slot_name":
-                    text = f"Укажите имя студента:"
+                    text = f"Укажите фамилию, имя и группу студента:"
                     dispatcher.utter_message(text=text)
                     return [SlotSet(REQUESTED_SLOT, slot)]
         return None
@@ -125,13 +125,13 @@ class CheckForm1(FormAction):
                 if slot == "slot_submit":
                     obj = tracker.get_slot("slot_intent_action")
                     if obj == "Записаться":
-                        text = f"{tracker.get_slot('slot_name')}, давайте сначала все проверим.\n" \
+                        text = f"Давайте сначала все проверим.\n" \
                                f"Запись на сдачу:\n" \
                                f"Студент: {tracker.get_slot('slot_name')}\n" \
                                f"Предмет: {tracker.get_slot('slot_subject')}\n" \
                                f"Подтверждаете?"
                     else:
-                        text = f"{tracker.get_slot('slot_name')}, давайте сначала все проверим.\n" \
+                        text = f"Давайте сначала все проверим.\n" \
                                f"Отмена записи на сдачу:\n" \
                                f"Студент: {tracker.get_slot('slot_name')}\n" \
                                f"Предмет: {tracker.get_slot('slot_subject')}\n" \
