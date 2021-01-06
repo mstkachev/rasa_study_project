@@ -5,17 +5,20 @@ slots:
   slot_intent_action: {type: text}
   slot_subject: {type: text}
   slot_name: {type: text}
+  slot_submit: {type: text}
   requested_slot:
     type: categorical
     values:
     - slot_intent_action
     - slot_subject
     - slot_name
+    - slot_submit
 actions:
 - action_set_slots_after_ner
 - action_get_table
 forms:
 - check_form
+- check_form_1
 
 session_config:
   session_expiration_time: 60

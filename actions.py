@@ -102,8 +102,59 @@ class CheckForm(FormAction):
             return {"slot_subject": None}
 
     async def submit(self, dispatcher, tracker, domain) -> List[Dict]:
-        return [FollowupAction("action_get_table")]
+        return [FollowupAction("check_form_1")]
 
+
+class CheckForm1(FormAction):
+
+    def name(self) -> Text:
+        return "check_form_1"
+
+    @staticmethod
+    def required_slots(tracker: Tracker) -> List[Text]:
+        return ["slot_submit"]
+
+    def slot_mappings(self) -> Dict[Text, Any]:
+        return {"slot_submit": [self.from_text()]}
+
+    def custom_request_next_slot(self, dispatcher, tracker, domain) -> Optional[List[EventType]]:
+
+        for slot in self.required_slots(tracker):
+            if self._should_request_slot(tracker, slot):
+
+                if slot == "slot_submit":
+                    obj = tracker.get_slot("slot_intent_action")
+                    if obj == "Записаться":
+                        text = f"{tracker.get_slot('slot_name')}, давайте сначала все проверим.\n" \
+                               f"Записываем {tracker.get_slot('slot_name')} на сдачу " \
+                               f"по {tracker.get_slot('slot_subject')}.\n" \
+                               f"Подтверждаете?"
+                    else:
+                        text = f"{tracker.get_slot('slot_name')}, давайте сначала все проверим.\n" \
+                               f"Вычеркиваем {tracker.get_slot('slot_name')} из очереди на сдачу " \
+                               f"по {tracker.get_slot('slot_subject')}.\n" \
+                               f"Подтверждаете?"
+                    buttons = [{"title": "Да", "payload": 'Да'},
+                               {"title": "Нет", "payload": 'Нет'}]
+                    dispatcher.utter_message(text=text, buttons=buttons)
+                    return [SlotSet(REQUESTED_SLOT, slot)]
+        return None
+
+    def request_next_slot(self, dispatcher, tracker, domain) -> Optional[List[EventType]]:
+        return self.custom_request_next_slot(dispatcher, tracker, domain)
+
+    def validate_slot_submit(self, value, dispatcher, tracker, domain):
+        if value in ["Да", "Нет"]:
+            return {"slot_submit": value}
+        else:
+            text_init = "Выберите значение с помощью кнопок!"
+            buttons = [{"title": "Записаться", "payload": 'Записаться'},
+                       {"title": "Отменить запись", "payload": 'Отменить запись'}]
+            dispatcher.utter_message(text=text_init, buttons=buttons)
+            return {"slot_submit": None}
+
+    async def submit(self, dispatcher, tracker, domain) -> List[Dict]:
+        return [FollowupAction("action_get_table")]
 
 class ActionGetTable(Action):
 
