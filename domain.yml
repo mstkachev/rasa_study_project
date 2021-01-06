@@ -1,5 +1,6 @@
 intents:
   - call_bot_intent
+  - bue
 slots:
   slot_intent_action: {type: text}
   slot_subject: {type: text}
