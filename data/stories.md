@@ -1,7 +1,3 @@
-## happy path
-* greet
-  - utter_greet
-
-## say goodbye
-* goodbye
-  - utter_goodbye
+## main scenario
+* call_bot_intent
+  - action_set_slots_after_ner

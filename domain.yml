@@ -1,14 +1,17 @@
 intents:
-  - greet
-  - goodbye
-
-responses:
-  utter_greet:
-  - text: "Привет))"
-
-  utter_goodbye:
-  - text: "Пока)"
-
-session_config:
-  session_expiration_time: 60
-  carry_over_slots_to_new_session: true
+  - call_bot_intent
+slots:
+  slot_intent_action: {type: text}
+  slot_subject: {type: text}
+  slot_name: {type: text}
+  requested_slot:
+    type: categorical
+    values:
+    - slot_intent_action
+    - slot_subject
+    - slot_name
+actions:
+- action_set_slots_after_ner
+- action_get_table
+forms:
+- check_form
