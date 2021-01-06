@@ -91,7 +91,7 @@ class CheckForm(FormAction):
             return {"slot_intent_action": None}
 
     def validate_slot_subject(self, value, dispatcher, tracker, domain):
-        if value in ["Записаться", "Отменить запись"]:
+        if value in ["Math", "Physics", "IT"]:
             return {"slot_subject": value}
         else:
             text_init = "Выберите значение с помощью кнопок!"
