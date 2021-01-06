@@ -20,8 +20,8 @@ action_endpoint:
 
 tracker_store:
     type: SQL
-    dialect: "mysql"  # the dialect used to interact with the db
-    url: "35.205.29.98"  # (optional) host of the sql db, e.g. "localhost"
+    dialect: "postgresql"  # the dialect used to interact with the db
+    url: "35.195.155.82"  # (optional) host of the sql db, e.g. "localhost"
     db: "rasa"  # path to your db
     username: ""# username used for authentication
     password: ""# password used for authentication
