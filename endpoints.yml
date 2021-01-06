@@ -20,10 +20,10 @@ action_endpoint:
 
 tracker_store:
     type: SQL
-    dialect: "postgresql"  # the dialect used to interact with the db
-    url: "35.195.155.82"  # (optional) host of the sql db, e.g. "localhost"
+    dialect: "mysql"  # the dialect used to interact with the db
+    url: "34.76.94.126"  # (optional) host of the sql db, e.g. "localhost"
     db: "rasa"  # path to your db
-    username: "postgres"# username used for authentication
+    username: "root"# username used for authentication
     password: "rasa"# password used for authentication
 #    query: # optional dictionary to be added as a query string to the connection URL
 #      driver: my-driver
