@@ -194,10 +194,10 @@ class ActionGetTable(Action):
                                             password='rasa', host='35.233.23.139')
                     cursor = conn.cursor()
                     cursor.execute(f"SELECT Number FROM {table} WHERE Name = '{name}'")
-                    num = cursor.fetchall()[0]
+                    num = cursor.fetchall()
                     logger.error(num)
-                    cursor.execute(f"DELETE FROM {table} WHERE Name = '{name}';"
-                                   f"UPDATE {table} SET Number = (Number - 1) WHERE Number > {num}")
+                    # cursor.execute(f"DELETE FROM {table} WHERE Name = '{name}';"
+                    #                f"UPDATE {table} SET Number = (Number - 1) WHERE Number > {num}")
                     cursor.close()
                     conn.commit()
                     conn.close()
