@@ -3,7 +3,6 @@
 <head>
   <link rel="stylesheet" href="https://npm-scalableminds.s3.eu-central-1.amazonaws.com/@scalableminds/chatroom@master/dist/Chatroom.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
 <style>
 body {font-family: Arial;}
 
