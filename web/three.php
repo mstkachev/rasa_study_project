@@ -1,5 +1,5 @@
 <?php
-$host="35.233.23.139";
+$host="";
 $user="postgres";
 $pass="rasa";
 $db="rasa";

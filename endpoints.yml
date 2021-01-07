@@ -4,7 +4,7 @@ action_endpoint:
 tracker_store:
     type: SQL
     dialect: "postgresql"
-    url: "35.233.23.139"
-    db: "rasa"
-    username: "postgres"
-    password: "rasa"
+    url: ""
+    db: ""
+    username: ""
+    password: ""
