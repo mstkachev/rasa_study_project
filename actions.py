@@ -188,4 +188,23 @@ class ActionGetTable(Action):
             except (Exception, psycopg2.DatabaseError) as error:
                 logger.error(error)
                 dispatcher.utter_message(text="Извините, произошла ошибка на сервере.")
+            else:
+                try:
+                    conn = psycopg2.connect(dbname='rasa', user='postgres',
+                                            password='rasa', host='35.233.23.139')
+                    cursor = conn.cursor()
+                    cursor.execute(f"SELECT Number FROM {table} WHERE Name = '{name}'")
+                    num = cursor.fetchone()
+                    cursor.execute(f"DELETE FROM {table} WHERE Name = '{name}'")
+                    cursor.execute(f"UPDATE {table} SET Number = (Number - 1) WHERE Number > {num}")
+                    cursor.close()
+                    conn.commit()
+                    conn.close()
+                    text = f"Студент {name} удален из очереди на сдачу по {tabble}.\n" \
+                           f"Удачи на сдаче!"
+                    dispatcher.utter_message(text=text)
+                except (Exception, psycopg2.DatabaseError) as error:
+                    logger.error(error)
+                    dispatcher.utter_message(text="Извините, у нас проблемы на сервере, "
+                                                  "либо такого студента я не нашел.")
         return [Restarted()]
