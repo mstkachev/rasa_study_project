@@ -165,22 +165,23 @@ class ActionGetTable(Action):
         return "action_get_table"
 
     def run(self, dispatcher, tracker, domain) -> List[EventType]:
-        table = tracker.get_slot("slot_subject")
+        tabble = tracker.get_slot("slot_subject")
         intent = tracker.get_slot("slot_intent_action")
         name = tracker.get_slot("slot_name")
         dict_table = {"Math": "math", "Physics": "phys", "IT": "it"}
-        table = dict_table[table]
+        table = dict_table[tabble]
         if intent == "Записаться":
             try:
                 conn = psycopg2.connect(dbname='rasa', user='postgres',
                                         password='rasa', host='35.233.23.139')
                 cursor = conn.cursor()
                 cursor.execute(f'SELECT * FROM {table}')
-                lenth = len(cursor.fetchall()) + 1
-                cursor.execute(f"INSERT INTO {table} (Name, Number) VALUES ('{name}', {lenth})")
+                lenth = int(len(cursor.fetchall())) + 1
+                cursor.execute(f"INSERT INTO {table} ('Name', 'Number') VALUES ('{name}', {lenth})")
                 cursor.close()
+                conn.commit()
                 conn.close()
-                text = f"Студент {name} записан на сдачу по {table}.\n" \
+                text = f"Студент {name} записан на сдачу по {tabble}.\n" \
                        f"Номер в очереди: {lenth}.\n" \
                        f"Удачи на сдаче!"
                 dispatcher.utter_message(text=text)
