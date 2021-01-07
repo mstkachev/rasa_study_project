@@ -177,7 +177,7 @@ class ActionGetTable(Action):
         if intent == "Записаться":
             try:
                 conn = psycopg2.connect(dbname='rasa', user='postgres',
-                                        password='rasa', host='35.233.23.139')
+                                        password='rasa', host='')
                 cursor = conn.cursor()
                 cursor.execute(f'SELECT * FROM {table}')
                 lenth = int(len(cursor.fetchall())) + 1
@@ -195,7 +195,7 @@ class ActionGetTable(Action):
         else:
             try:
                 conn = psycopg2.connect(dbname='rasa', user='postgres',
-                                        password='rasa', host='35.233.23.139')
+                                        password='rasa', host='')
                 cursor = conn.cursor()
                 cursor.execute(f"SELECT * FROM {table} WHERE Name = '{name}'")
                 num = int(cursor.fetchone()[1])
