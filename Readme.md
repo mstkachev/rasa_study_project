@@ -46,7 +46,7 @@ $ sudo apt-get upgrade
 $ sudo apt-get install tmux
 $ tmux new -s actions && tmux new -s core && tmux new -s train
 ```
-Активировать ваше виртуальное окружение и зайти в папку проекта в каждой из вкладок, после чего выполнить:  
+Активировать Ваше виртуальное окружение и зайти в папку проекта в каждой из вкладок, после чего выполнить:  
 В train: 
 ```
 $ rasa data validate
