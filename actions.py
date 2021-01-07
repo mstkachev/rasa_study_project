@@ -195,8 +195,9 @@ class ActionGetTable(Action):
                     cursor = conn.cursor()
                     cursor.execute(f"SELECT Number FROM {table} WHERE Name = '{name}'")
                     num = cursor.fetchone()
-                    cursor.execute(f"DELETE FROM {table} WHERE Name = '{name}'")
-                    cursor.execute(f"UPDATE {table} SET Number = (Number - 1) WHERE Number > {num}")
+                    logger.error(num)
+                    cursor.execute(f"DELETE FROM {table} WHERE Name = '{name}';"
+                                   f"UPDATE {table} SET Number = (Number - 1) WHERE Number > {num}")
                     cursor.close()
                     conn.commit()
                     conn.close()
