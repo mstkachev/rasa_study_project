@@ -46,6 +46,11 @@ $ sudo apt-get install tmux
 $ tmux new -s actions && tmux new -s core && tmux new -s train
 ```
 Активировать ваше виртуальное окружение и зайти в папку проекта в каждой из вкладок, после чего выполнить:  
+В train: 
+```
+$ rasa data validate
+$ rasa train --force
+```
 В actions: 
 ```
 $ rasa run actions --debug
@@ -53,10 +58,5 @@ $ rasa run actions --debug
 В core: 
 ```
 $ rasa run -m models --enable-api --cors "*" --endpoints endpoints.yml --debug
-```
-В actions: 
-```
-$ rasa data validate
-$ rasa train --force
 ```
 4. скопировать содержимое папки web на хостинг Вашего домена
