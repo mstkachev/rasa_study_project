@@ -38,7 +38,8 @@ tracker_store:
     username: "" # имя пользователя
     password: "" # пароль 
 ```
-Эти же параметры передать в файлы web/one.php, web/two.php, web/three.php в переменные $host, $db, $user и $pass.
+Эти же параметры передать в файлы web/one.php, web/two.php, web/three.php в переменные $host, $db, $user и $pass. 
+То же самое добавить в actions.py в класс ActionGetTable (два заметных места в коде).
 3. На сервере сделать три вкладки tmux:
 ```
 $ sudo apt-get upgrade
