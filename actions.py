@@ -193,7 +193,7 @@ class ActionGetTable(Action):
                 conn = psycopg2.connect(dbname='rasa', user='postgres',
                                         password='rasa', host='35.233.23.139')
                 cursor = conn.cursor()
-                cursor.execute(f"SELECT Number FROM {table} WHERE Name = '{name}'")
+                cursor.execute(f"SELECT * FROM {table} WHERE Name = '{name}'")
                 num = int(cursor.fetchone())
                 logger.error(num)
                 cursor.execute(f"DELETE FROM {table} WHERE Name = '{name}'")
