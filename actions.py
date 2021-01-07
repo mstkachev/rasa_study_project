@@ -157,7 +157,11 @@ class CheckForm1(FormAction):
             return {"slot_submit": None}
 
     async def submit(self, dispatcher, tracker, domain) -> List[Dict]:
-        return [FollowupAction("action_get_table")]
+        if tracker.get_slot("slot_submit") == "Да":
+            return [FollowupAction("action_get_table")]
+        else:
+            dispatcher.utter_message(text="Рад был помочь!")
+            return [Restarted()]
 
 class ActionGetTable(Action):
 
