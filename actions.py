@@ -177,7 +177,7 @@ class ActionGetTable(Action):
                 cursor = conn.cursor()
                 cursor.execute(f'SELECT * FROM {table}')
                 lenth = int(len(cursor.fetchall())) + 1
-                cursor.execute(f"INSERT INTO {table} (Name, Number) VALUES", (f'{name}', {lenth}))
+                cursor.execute(f"INSERT INTO {table} (Name, Number) VALUES (f'{name}', {lenth})")
                 cursor.close()
                 conn.commit()
                 conn.close()
