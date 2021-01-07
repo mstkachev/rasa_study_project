@@ -185,6 +185,7 @@ class ActionGetTable(Action):
                        f"Номер в очереди: {lenth}.\n" \
                        f"Удачи на сдаче!"
                 dispatcher.utter_message(text=text)
-            except Exception:
+            except (Exception, psycopg2.DatabaseError) as error:
+                logger.error(error)
                 dispatcher.utter_message(text="Извините, произошла ошибка на сервере.")
         return [Restarted()]
