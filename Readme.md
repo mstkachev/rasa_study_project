@@ -59,4 +59,4 @@ $ rasa run actions --debug
 ```
 $ rasa run -m models --enable-api --cors "*" --endpoints endpoints.yml --debug
 ```
-4. скопировать содержимое папки web на хостинг Вашего домена
+4. скопировать содержимое папки web на хостинг Вашего домена.
