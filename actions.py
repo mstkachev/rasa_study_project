@@ -209,3 +209,16 @@ class ActionGetTable(Action):
                 dispatcher.utter_message(text="Извините, у нас проблемы на сервере, "
                                               "либо такого студента я не нашел.")
         return [Restarted()]
+
+
+class ActionHelp(Action):
+
+    def name(self) -> Text:
+        return "action_help"
+
+    def run(self, dispatcher, tracker, domain) -> List[EventType]:
+        dispatcher.utter_message(text="Чтобы я смог Вам помочь, "
+                                      "Вам нужно просто написать мне. Вы можете начать диалог как Вам удобно. Но если "
+                                      "Вы хотите ускорить процесс, сразу пишите мне, какой предмет Вас интересует!"
+                                      "Список предметов можно найти в самом верху. Всегда рад помочь!")
+        return [Restarted()]

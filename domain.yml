@@ -1,9 +1,10 @@
 intents:
-  - call_bot_intent
+  - call_bot_intent: {use_entities: ["intent_action", "subject"]}
   - bue
+  - help
 slots:
-  slot_intent_action: {type: text}
-  slot_subject: {type: text}
+  slot_intent_action: {type: categorical, values: [Записаться, Отменить запись]}
+  slot_subject: {type: categorical, values: [Math, Physics, IT]}
   slot_name: {type: text}
   slot_submit: {type: text}
   requested_slot:
@@ -13,9 +14,13 @@ slots:
     - slot_subject
     - slot_name
     - slot_submit
+entities:
+- intent_action
+- subject
 actions:
 - action_set_slots_after_ner
 - action_get_table
+- action_help
 forms:
 - check_form
 - check_form_1

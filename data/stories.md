@@ -5,3 +5,7 @@
 ## scenario
 * bue
   - action_set_slots_after_ner
+  
+## helping
+* help
+  - action_help
