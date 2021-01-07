@@ -3,6 +3,7 @@ import logging
 import json
 import numpy as np
 import datetime
+import psycopg2
 
 from dateutil.relativedelta import relativedelta
 from typing import Any, Text, Dict, List, Union, Optional
@@ -66,9 +67,9 @@ class CheckForm(FormAction):
                     return [SlotSet(REQUESTED_SLOT, slot)]
                 if slot == "slot_subject":
                     text = f"Какой предмет интересует?"
-                    buttons = [{"title": "Math", "payload": 'Math'},
-                               {"title": "Physics", "payload": 'Physics'},
-                               {"title": "IT", "payload": 'IT'}]
+                    buttons = [{"title": "Math", "payload": 'math'},
+                               {"title": "Physics", "payload": 'phys'},
+                               {"title": "IT", "payload": 'it'}]
                     dispatcher.utter_message(text=text, buttons=buttons)
                     return [SlotSet(REQUESTED_SLOT, slot)]
                 if slot == "slot_name":
@@ -95,9 +96,9 @@ class CheckForm(FormAction):
             return {"slot_subject": value}
         else:
             text_init = "Выберите значение с помощью кнопок!"
-            buttons = [{"title": "Math", "payload": 'Math'},
-                       {"title": "Physics", "payload": 'Physics'},
-                       {"title": "IT", "payload": 'IT'}]
+            buttons = [{"title": "Math", "payload": 'math'},
+                       {"title": "Physics", "payload": 'phys'},
+                       {"title": "IT", "payload": 'it'}]
             dispatcher.utter_message(text=text_init, buttons=buttons)
             return {"slot_subject": None}
 
@@ -164,5 +165,23 @@ class ActionGetTable(Action):
         return "action_get_table"
 
     def run(self, dispatcher, tracker, domain) -> List[EventType]:
-        dispatcher.utter_message(text="Ок")
+        table = tracker.get_slot("slot_subject")
+        intent = tracker.get_slot("slot_intent_action")
+        name = tracker.get_slot("slot_name")
+        if intent == "Записаться":
+            try:
+                conn = psycopg2.connect(dbname='rasa', user='postgres',
+                                        password='rasa', host='35.233.23.139')
+                cursor = conn.cursor()
+                cursor.execute(f'SELECT * FROM {table}')
+                lenth = len(cursor.fetchall()) + 1
+                cursor.execute(f"INSERT INTO {table} (Name, Number) VALUES ('{name}', {lenth})")
+                cursor.close()
+                conn.close()
+                text = f"Студент {name} записан на сдачу по {table}.\n" \
+                       f"Номер в очереди: {lenth}.\n" \
+                       f"Удачи на сдаче!"
+                dispatcher.utter_message(text=text)
+            except Exception:
+                dispatcher.utter_message(text="Извините, произошла ошибка на сервере.")
         return [Restarted()]
