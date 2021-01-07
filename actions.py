@@ -202,7 +202,7 @@ class ActionGetTable(Action):
                 conn.commit()
                 conn.close()
                 text = f"Студент {name} удален из очереди на сдачу по {tabble}.\n" \
-                       f"Удачи на сдаче!"
+                       f"Всего доброго!"
                 dispatcher.utter_message(text=text)
             except (Exception, psycopg2.DatabaseError) as error:
                 logger.error(error)
